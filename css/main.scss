@@ -1,0 +1,298 @@
+// <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+    margin: 1.5em; //em is relative
+    font-family: 'Poppins', sans-serif;
+}
+
+a{
+    text-decoration:none;
+    font-size: 1.3rem; //relative font sizes
+}
+
+.hero-img {
+    position:absolute;
+    top:0;
+    left:0;
+    background:url('../images/shoe2.jpeg');
+    background-size: cover;
+    background-position-x: 20%;//move side by 20%
+    background-position-y: 20%; //move down by 20%
+    width:100%;
+    height:100vh;
+    z-index:-1;
+    // overflow:hidden;
+    //animation
+    animation:introLoad 2s forwards; //we specified the animation down the doc
+}
+
+.logo {
+    color:white;
+    font-weight: bold;
+}
+
+nav {
+    position:fixed;
+    right: 0;
+    top:0;
+    height:100vh;
+    background-color: white;
+    width:50%;
+    z-index:999;
+    text-transform: uppercase;
+    //change the transform to 0 to reveal using js
+    transform: translateX(100%); //psuh to the side 100%
+    transition:transform .5s ease-in-out; //animate while transforming
+    ul{
+        list-style-type: none; //get rid of the list circles
+        padding:0;
+        margin-top: 8em;
+
+        a{
+            color:black;
+            padding: .75em 2em;
+            //padding on a link element will not work unitil you display it as block
+            display:block; 
+            width:100%;
+
+            //on hover
+            &:hover{
+                background: rgb(225, 225, 225);
+            }
+
+            
+        }
+    }
+    .close{
+        float:right;
+        margin:2em;
+        width:2em;
+    }
+}
+
+header {
+    display: flex; //use this if we have elements to be side by side with each other
+    justify-content: space-between; //justifies the content and give inbetween spaces
+
+    //take care of svg inside the header, the mobileMenu
+    svg {
+        width:2em;
+        margin-top:-.6em;
+        cursor: pointer;
+
+    }
+}
+
+h1{
+    font-size:3rem;
+    margin-top:2em;
+    line-height: 3.3rem;
+}
+
+.subhead{
+    font-size: 1.4rem;
+}
+section.hero {
+    color:white;
+    height:90vh;
+    animation: moveDown 1s ease-in-out forwards;
+    opacity: 0;
+
+    //the down arrow svg
+    .down-arrow {
+        stroke: white;
+        position: absolute;
+        bottom: 8em;
+        width: 1em;
+        animation: moveArroww 1s alternate-reverse infinite; //moveArrow is down the doc
+        //path of the svg
+        path{
+            fill:white;
+        }
+
+    }
+}
+
+
+.more-info {
+
+    img{
+        width:100%;
+        //we use this to fit the image and use the height to give the particular height
+        //even if the image is bigger, it will fit the control
+        object-fit: cover;
+        height:11em;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size:1.25rem;
+
+    }
+    .desc {
+        line-height: 1.5rem;
+        font-weight: 200;
+    }
+}
+
+//if screen get wider than 680 the below rule will apply
+@media only screen and (min-width: 680px) {
+
+    body {
+            margin: 1.5em 5em; //em is relative left and right 5em
+            font-family: 'Poppins', sans-serif;
+        }
+
+}
+
+//if screen get wider than 920 the below rule will apply
+@media only screen and (min-width: 920px) {
+
+        .mobileMenu{
+            display:none;
+        }
+        //Navigation menu
+        nav {
+            transform:translateX(0);
+            position:unset;
+            display:block;
+            width:auto;
+            height:auto;
+            background:none;
+
+            //hide the close svg
+            svg.close{
+                display:none;
+            }
+    
+            ul {
+                display:flex;
+                margin:0;
+    
+                a{
+                    color:white;
+                    padding:.5em 1.5em;
+                    font-size:.9rem;
+    
+                    &:hover{
+                        background:none;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        .hero-img{
+            left:unset;
+            right:0;
+            width:50%;
+            height:42em;
+        }
+        .logo{
+            color:black;
+            span{
+                color:red
+            }
+        }
+
+        //since its inside a section, we have to be specific
+        section.hero{
+            color:black;
+            height: auto;
+            width:40%;
+            margin-bottom:8em;
+
+            svg.down-arrow{
+                stroke: black;
+                position:unset;
+                path{
+                    fill:black
+                }
+            }
+        }
+
+        .feature {
+            display:grid;
+            grid-template-columns: repeat(2, auto); //repeat columns and auto situate them
+            gap:3em;
+            margin-bottom: 5em;
+
+            img{
+                width:35em;
+            }
+            .content{
+                text-align: right;
+                width:35em;
+            }
+        }
+
+        //we are reversing the grid
+        .feature.left{
+            grid-template-areas: "left right";
+
+            img{
+                grid-area:left;
+            }
+
+            .content{
+                text-align: left;
+                width:35em;
+                justify-self: left;
+            }
+
+        }
+}
+
+@media only screen and (min-width: 1200px) {
+
+    .wrapper{
+        width:1200px;
+        margin:0 auto;
+    }
+    .feature{
+        gap:0;
+    }
+}
+
+//use bennettfeely.com/clippy
+@keyframes introLoad {
+    from {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+        to {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+}
+
+
+//remove if using in react
+.open-nav{
+    transform: translateX(0%);
+}
+
+
+
+//for the arrow
+
+@keyframes moveArroww {
+    from {
+            transform: translateY(0%);
+        }
+
+    to {
+        transform: translateY(10%);
+    }
+}
+
+@keyframes moveDown {
+
+    from {
+            transform: translateY(-100px);
+        }
+    
+        to {
+            transform: translateY(0px);
+            opacity:1;
+        }
+    
+}
